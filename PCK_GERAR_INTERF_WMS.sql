@@ -1,12 +1,13 @@
 CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
+   -- TESTE GIT
    --
    -- ARQUIVO...: PCK_GERAR_INTERF_WMS.SQL
    -- OBJETIVO..:
    -- AUTOR/DATA: Helena 27/05/2020
-   -- ALTERACOES: 01/08/2020 - Implementação das procedures de geração das informações dos Pedidos nas INT_E_CAB_PEDIDO e INT_E_DET_PEDIDO
-   --                          no momento da geração do romaneio
+   -- ALTERACOES: 01/08/2020 - Implementaï¿½ï¿½o das procedures de geraï¿½ï¿½o das informaï¿½ï¿½es dos Pedidos nas INT_E_CAB_PEDIDO e INT_E_DET_PEDIDO
+   --                          no momento da geraï¿½ï¿½o do romaneio
    --
-   -- Pacote de procedures que irão popular as tabelas de Interfaces para envio das informações do GC para o WMS
+   -- Pacote de procedures que irï¿½o popular as tabelas de Interfaces para envio das informaï¿½ï¿½es do GC para o WMS
    --
    D_SQLERRM GC.GC_MSG.TX_OCOR%TYPE;
    D_ID_MSG  GC.GC_MSG.ID_MSG%TYPE;
@@ -15,7 +16,7 @@ CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
    -- Dados da Produto no WMS --
    PROCEDURE PR_GRV_PRODUTO(P_ID_PROD IN GC.PRODUTO.ID_PROD%TYPE);
    --
-   -- Dados de Código de Barra do Produto no WMS --
+   -- Dados de Cï¿½digo de Barra do Produto no WMS --
    PROCEDURE PR_GRV_BARRA_PROD(P_ID_PROD IN GC.PRODUTO.ID_PROD%TYPE,
                                P_TP_PROD IN VARCHAR2,
                                P_NU_SEQ  IN NUMBER);
@@ -46,7 +47,7 @@ CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
                                     P_CD_FIL_NF IN GC.FILIAL.CD_FIL%TYPE,
                                     P_REC_CABNF IN WMS.INT_E_CAB_NOTA_FISCAL%ROWTYPE);
    --
-   -- Processo chamado das telas/processo de liberação Romaneio que aciona as procedures popular
+   -- Processo chamado das telas/processo de liberaï¿½ï¿½o Romaneio que aciona as procedures popular
    --   as interfaces de INT_E de PEDIDO_SAIDA de acordo com o tipo de romaneio
    --   P_FIL_ROMANEIO/P_NR_ROMANEIO/P_DT_ROMANEIO - Dados do Romaneio
    --   P_TP_ROMANEIO - PDS / GUIA / REQ / POS / RUC
@@ -77,14 +78,14 @@ CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
                             P_TP_AGRUPA    IN VARCHAR2,
                             P_NR_AGRUPA    IN NUMBER,
                             P_CD_SITUACAO  IN NUMBER);
-   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das Requisições de Abastecimento Loja / Pedidos Retira Loja
-   -- e gerar o PEDIDO_SAIDA para o WMS (Acessórios e Moveis)
+   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das Requisiï¿½ï¿½es de Abastecimento Loja / Pedidos Retira Loja
+   -- e gerar o PEDIDO_SAIDA para o WMS (Acessï¿½rios e Moveis)
    PROCEDURE PR_PEDIDO_REQ(P_FIL_ROMANEIO IN ROMANEIO_SEPARACAO.CD_FIL%TYPE,
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
                            P_TP_AGRUPA    IN VARCHAR2,
                            P_NR_AGRUPA    IN NUMBER,
                            P_CD_SITUACAO  IN NUMBER);
-   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das POS GERADAS - Requisições Interna entre Filiais e Outros
+   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das POS GERADAS - Requisiï¿½ï¿½es Interna entre Filiais e Outros
    -- e gerar o PEDIDO_SAIDA para o WMS
    PROCEDURE PR_PEDIDO_POS(P_FIL_ROMANEIO IN ROMANEIO_SEPARACAO.CD_FIL%TYPE,
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
@@ -96,7 +97,7 @@ CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
                            P_DT_ROMANEIO  IN ROMANEIO_SEPARACAO.DT_GERA%TYPE,
                            P_CD_SITUACAO  IN NUMBER);
-   -- Dados de Ajustes de Estoque - Movimentações Internas Depósito - WMS --
+   -- Dados de Ajustes de Estoque - Movimentaï¿½ï¿½es Internas Depï¿½sito - WMS --
    PROCEDURE PR_GRV_AJUSTE_ESTQ(P_NR_REQ      IN ITEM_REQ_INTERNA.NR_REQ%TYPE,
                                 P_AB_REQ      IN ITEM_REQ_INTERNA.AB_REQ%TYPE,
                                 P_CD_CCO      IN ITEM_REQ_INTERNA.CD_CCO%TYPE,
@@ -105,18 +106,18 @@ CREATE OR REPLACE PACKAGE GC.PCK_GERAR_INTERF_WMS AS
                                 P_AREA_ORIG   IN VARCHAR2,
                                 P_AREA_DEST   IN VARCHAR2,
                                 P_CD_SITUACAO IN NUMBER);
-   -- Dados de Transportadora Rota no WMS -- falta definir a informação que será repassada ao WMS
+   -- Dados de Transportadora Rota no WMS -- falta definir a informaï¿½ï¿½o que serï¿½ repassada ao WMS
    PROCEDURE PR_GRV_TRANSP_ROTA(P_CD_ROTA IN FRETE_REGRA_ORIGEM_DESTINO.ID_FROD%TYPE);
    /*
       --
       -- Dados de Embalagem no WMS --
       PROCEDURE PR_GRV_EMBALAGEM;
       --
-      -- Dados de Alterados do Pedido Saída no WMS --
+      -- Dados de Alterados do Pedido Saï¿½da no WMS --
       PROCEDURE PR_GRV_ALTERA_DADOS_PEDIDO;
       --
    */
-   -- Dados de Solicitação LGPD - Lei Geral de Proteção de Dados - para o WMS --
+   -- Dados de Solicitaï¿½ï¿½o LGPD - Lei Geral de Proteï¿½ï¿½o de Dados - para o WMS --
    PROCEDURE PR_GRV_LGPD(P_CNPJ_CPF IN PESSOA.ID_CPF%TYPE);
    --
 
@@ -156,13 +157,13 @@ END PCK_GERAR_INTERF_WMS;
 CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
    --
    -- ARQUIVO...: PCK_GERAR_INTERF_WMS.SQL
-   -- OBJETIVO..: Pacote de procedures que irão popular as tabelas de Interfaces para envio das informações do GC para o WMS
+   -- OBJETIVO..: Pacote de procedures que irï¿½o popular as tabelas de Interfaces para envio das informaï¿½ï¿½es do GC para o WMS
    -- AUTOR/DATA: Helena 27/05/2020
-   -- ALTERACOES: 01/08/2020 - Implementação das procedures de geração das informações dos Pedidos nas INT_E_CAB_PEDIDO e INT_E_DET_PEDIDO
-   --                          no momento da geração do romaneio
-   --             17/12/2020 - Inclusão da região concatenada a DS_PROGRAM_DIARIA_SERVICO]
+   -- ALTERACOES: 01/08/2020 - Implementaï¿½ï¿½o das procedures de geraï¿½ï¿½o das informaï¿½ï¿½es dos Pedidos nas INT_E_CAB_PEDIDO e INT_E_DET_PEDIDO
+   --                          no momento da geraï¿½ï¿½o do romaneio
+   --             17/12/2020 - Inclusï¿½o da regiï¿½o concatenada a DS_PROGRAM_DIARIA_SERVICO]
    --
-   --             31/03/2021 - LBUENO - Inclusão do campo ID_FROD para popular o campo CD_ROTA.(LOG-520)
+   --             31/03/2021 - LBUENO - Inclusï¿½o do campo ID_FROD para popular o campo CD_ROTA.(LOG-520)
    --
    -- Cada registro gerado nas tabelas de interface para Envio - INT_E deve ser gerado sequencia do campo NU_SEQ
    -- obte-lo pela function WMS.PCK_GERAR_INTERF_WMS.FC_SEQ_ENTRADA
@@ -182,15 +183,15 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 DP.IN_UNID_MEDIDA DS_UNIDADE_MEDIDA,
                 'N' ID_ACEITA_DECIMAL,
                 'NC' CD_EMBALAGEM,
-                'NÃO CADASTRADO' DS_EMBALAGEM,
+                'Nï¿½O CADASTRADO' DS_EMBALAGEM,
                 -- LOG-348 - Troca do campo de Acondicionamento na interface
                 1  QT_UNI_EMBALAGEM, -- QTDE DE UNID. POR embalagem
                 NVL(DPUE.QT_ACOND, 1) DS_ESPECIFICACAO,
-                P.ID_PROD CD_PRODUTO_MASTER, -- SE IGUAL CD_produto - mono senão multi embalagem
+                P.ID_PROD CD_PRODUTO_MASTER, -- SE IGUAL CD_produto - mono senï¿½o multi embalagem
                 1 QT_ITENS,
                 DP.CD_GEP CD_FAMILIA,
                 SUBSTR(GE.DS_GEP, 1, 60) DS_FAMILIA,
-                -- 05/11/2020 - busca dimensão - não considerar o produto montado - so caso não exista informação do Unitario
+                -- 05/11/2020 - busca dimensï¿½o - nï¿½o considerar o produto montado - so caso nï¿½o exista informaï¿½ï¿½o do Unitario
                 DECODE(NVL(DPUE_U.MD_ALT,0), 0, DP.MD_ALT_MONT_MIN, DPUE_U.MD_ALT) VL_ALTURA,
                 DECODE(NVL(DPUE_U.MD_LARG,0), 0, DP.MD_LARG_MONT_MIN, DPUE_U.MD_LARG) VL_LARGURA,
                 DECODE(NVL(DPUE_U.MD_PROF,0), 0, DP.MD_PROF_MONT_MIN, DPUE_U.MD_PROF) VL_PROFUNDIDADE,
@@ -216,11 +217,11 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 DP.CD_FAM CD_GRUPO,
                 SUBSTR(F.NM_FAM, 1, 60) DS_GRUPO,
                 'NC' CD_SUBGRUPO,
-                'NÃO CADASTRADO' DS_SUBGRUPO,
+                'Nï¿½O CADASTRADO' DS_SUBGRUPO,
                 'NC' CD_MODELO,
-                'NÃO CADASTRADO' DS_MODELO,
+                'Nï¿½O CADASTRADO' DS_MODELO,
                 --NULL TP_ARMAZENAGEM_PRODUTO,
-                /*Caso o dt_inval seja nulo, pego o maior nr_tot, se não significa que o produto e embalagem unica*/
+                /*Caso o dt_inval seja nulo, pego o maior nr_tot, se nï¿½o significa que o produto e embalagem unica*/
                 (SELECT DECODE(MAX(NVL(DECODE(CPM.DT_INVAL,NULL,CPM.NR_TOT,1), 1)), 1, 'P', 'C')
                    FROM PRODUTO            PRD,
                         MULTIPLA_EMBALAGEM CPM
@@ -240,8 +241,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 NULL DS_TAMANHO_PRODUTO,
                 NULL CD_PRODUTO_REFERENCIA,
                 'N' ID_PRODUTO_GRADE,
-                --NULL TP_PRODUTO, -- NO JSON SÓ ENVIA QDO KIT
-                /*Caso o dt_inval seja nulo, pego o maior nr_tot, se não significa que o produto e embalagem unica*/
+                --NULL TP_PRODUTO, -- NO JSON Sï¿½ ENVIA QDO KIT
+                /*Caso o dt_inval seja nulo, pego o maior nr_tot, se nï¿½o significa que o produto e embalagem unica*/
                 (SELECT DECODE(MAX(NVL(DECODE(CPM.DT_INVAL,NULL,CPM.NR_TOT,1), 1)), 1, 'P', 'K')
                    FROM PRODUTO            PRD,
                         MULTIPLA_EMBALAGEM CPM
@@ -291,11 +292,11 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 DP.IN_UNID_MEDIDA DS_UNIDADE_MEDIDA,
                 'N' ID_ACEITA_DECIMAL,
                 'NC' CD_EMBALAGEM,
-                'NÃO CADASTRADO' DS_EMBALAGEM,
+                'Nï¿½O CADASTRADO' DS_EMBALAGEM,
                 -- LOG-348 - Troca do campo de Acondicionamento na interface
                 1  QT_UNI_EMBALAGEM, -- QTDE DE UNID. POR embalagem
                 NVL(DPUE.QT_ACOND, 1) DS_ESPECIFICACAO,
-                P.ID_PROD CD_PRODUTO_MASTER, -- SE IGUAL CD_produto - mono senão multi embalagem
+                P.ID_PROD CD_PRODUTO_MASTER, -- SE IGUAL CD_produto - mono senï¿½o multi embalagem
                 1 QT_ITENS,
                 DP.CD_GEP CD_FAMILIA,
                 SUBSTR(GE.DS_GEP, 1, 60) DS_FAMILIA,
@@ -324,9 +325,9 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 DP.CD_FAM CD_GRUPO,
                 SUBSTR(F.NM_FAM, 1, 60) DS_GRUPO,
                 'NC' CD_SUBGRUPO,
-                'NÃO CADASTRADO' DS_SUBGRUPO,
+                'Nï¿½O CADASTRADO' DS_SUBGRUPO,
                 'NC' CD_MODELO,
-                'NÃO CADASTRADO' DS_MODELO,
+                'Nï¿½O CADASTRADO' DS_MODELO,
                 --NULL TP_ARMAZENAGEM_PRODUTO,
                 'C' TP_ARMAZENAGEM_PRODUTO,
                 NULL CD_DEPARTAMENTO,
@@ -343,7 +344,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 NULL DS_TAMANHO_PRODUTO,
                 NULL CD_PRODUTO_REFERENCIA,
                 'N' ID_PRODUTO_GRADE, --
-                'C' TP_PRODUTO, -- NO JSON SÓ ENVIA QDO KIT - componente
+                'C' TP_PRODUTO, -- NO JSON Sï¿½ ENVIA QDO KIT - componente
                 NULL QT_FATOR_CONVERSAO_SORTER,
                 NULL TP_UNIDADE_LOGISTICA_SORTER,
                 'NC' CD_EMBALAGE_EXPEDICAO,
@@ -365,7 +366,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND CMP.ID_PROD(+) = P.ID_PROD
             AND CMP.NR_TOT <> 1 -- para desconsiderar cadastros errados - prods cancelados
             AND P.ID_PROD = P_ID_PROD
-            AND CMP.DT_INVAL IS NULL  -- se o valor não e null significa que a embalagem foi cancelada
+            AND CMP.DT_INVAL IS NULL  -- se o valor nï¿½o e null significa que a embalagem foi cancelada
             AND RPR.CD_REF = P.CD_REF
             AND COR.AB_COR = RPR.AB_COR1
             AND D.CD_DIV = DP.CD_DIV
@@ -415,7 +416,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                INTO R_PROD;
             EXIT WHEN C_PROD%NOTFOUND;
             --
-            -- Passa o ID_PROD, pois o CD_PRODUTO é montado para Produtos Multi Embalagem
+            -- Passa o ID_PROD, pois o CD_PRODUTO ï¿½ montado para Produtos Multi Embalagem
             /*
             -- Comentado para Inicialmente considerar como default 88
             OPEN C_ROTAT(R_PROD.ID_PROD,
@@ -498,12 +499,12 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             P_REC_PROD.ID_CONFERE_DURANTE_SEPARACAO := R_PROD.ID_CONFERE_DURANTE_SEPARACAO;
             -- Insere na tabela INT_E_PRODUTO
             PR_INS_PRODUTO(P_REC_PROD);
-            -- Chama Procedure Insere os códigos da barra do produto
+            -- Chama Procedure Insere os cï¿½digos da barra do produto
             IF R_PROD.TP_PROD = 'P' OR
                (R_PROD.TP_PROD = 'C' AND V_INS_BARRA_CMP = 'S') THEN
                --
                PR_GRV_BARRA_PROD(R_PROD.ID_PROD, R_PROD.TP_PROD, P_REC_PROD.NU_SEQ); -- Prod. Master / Componentes KIT
-               -- controle para o compenente só executar no 1o, pois gera barra de todos volumes na 1a vez
+               -- controle para o compenente sï¿½ executar no 1o, pois gera barra de todos volumes na 1a vez
                IF R_PROD.TP_PROD = 'C' THEN
                   V_INS_BARRA_CMP := 'N';
                END IF;
@@ -534,19 +535,19 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --
    END PR_GRV_PRODUTO;
    --
-   -- Dados de Código de Barra do Produto no WMS --
+   -- Dados de Cï¿½digo de Barra do Produto no WMS --
    PROCEDURE PR_GRV_BARRA_PROD(P_ID_PROD IN GC.PRODUTO.ID_PROD%TYPE,
                                P_TP_PROD IN VARCHAR2,
                                P_NU_SEQ  IN NUMBER) IS
       --
       -- Acionado da PR_GRV_PRODUTO
       -- P_TP_PROD = "P" - Produto Master / "C" - Componente KIT
-      -- CD_SITUACAO - 1-Inserir / 2-Cancelar -- considerando só a inclusão
+      -- CD_SITUACAO - 1-Inserir / 2-Cancelar -- considerando sï¿½ a inclusï¿½o
       --
       -- Declara rowtype para insert
       P_REC_BARRA WMS.INT_E_CODIGO_BARRA%ROWTYPE;
       -- Cursor Codigo Barra da Master
-      -- produto master de Multi Volumes não gera o tipo 1 - padrão WIS, só gerar EAN13
+      -- produto master de Multi Volumes nï¿½o gera o tipo 1 - padrï¿½o WIS, sï¿½ gerar EAN13
       CURSOR C_BARRA_MASTER IS
          SELECT 1 CD_EMPRESA,
                 P.ID_PROD CD_PRODUTO,
@@ -567,7 +568,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND NOT EXISTS (SELECT 1
                    FROM MULTIPLA_EMBALAGEM MP
                   WHERE MP.ID_PROD = P.ID_PROD
-                    AND MP.DT_INVAL IS NULL)  -- se o valor não e null significa que a embalagem foi cancelada
+                    AND MP.DT_INVAL IS NULL)  -- se o valor nï¿½o e null significa que a embalagem foi cancelada
          UNION
          SELECT 1 CD_EMPRESA,
                 P.ID_PROD CD_PRODUTO,
@@ -589,7 +590,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           ORDER BY TP_CODIGO_BARRAS;
       --
       -- Cursor Cod. Barras dos Compomente do Produto
-      -- componentes não gera o tipo 1 - padrão WIS, só gerar EAN13 e 128
+      -- componentes nï¿½o gera o tipo 1 - padrï¿½o WIS, sï¿½ gerar EAN13 e 128
       CURSOR C_BARRA_KIT IS
          SELECT 1 CD_EMPRESA,
                 P.ID_PROD || '/' || CMP.NR_COMP CD_PRODUTO,
@@ -609,7 +610,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 MULTIPLA_EMBALAGEM CMP
           WHERE P.ID_PROD = P_ID_PROD
             AND CMP.ID_PROD = P.ID_PROD
-            AND CMP.DT_INVAL IS NULL  -- se o valor não e null significa que a embalagem foi cancelada
+            AND CMP.DT_INVAL IS NULL  -- se o valor nï¿½o e null significa que a embalagem foi cancelada
          UNION
          SELECT 1 CD_EMPRESA,
                 P.ID_PROD || '/' || CMP.NR_COMP CD_PRODUTO,
@@ -630,7 +631,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           WHERE P.ID_PROD = P_ID_PROD
             AND CMP.ID_PROD = P.ID_PROD
             AND P.ID_PROD <> P.CD_INTER
-            AND CMP.DT_INVAL IS NULL  -- se o valor não e null significa que a embalagem foi cancelada
+            AND CMP.DT_INVAL IS NULL  -- se o valor nï¿½o e null significa que a embalagem foi cancelada
           ORDER BY TP_CODIGO_BARRAS;
    BEGIN
       IF P_TP_PROD = 'P' THEN
@@ -702,11 +703,11 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
    -- Dados de Cliente no WMS --
    PROCEDURE PR_GRV_CLIENTE(P_ID_CLIENTE IN GC.PESSOA.ID_PESSOA%TYPE,
                             P_CD_DEP_WMS IN VARCHAR2) IS
-      -- P_cd_dep_wms já deve vir com LPAD aplicado
+      -- P_cd_dep_wms jï¿½ deve vir com LPAD aplicado
       -- Declara rowtype para insert
       P_REC_CLIENTE WMS.INT_E_CLIENTE%ROWTYPE;
-      -- LOG-595 - Inversão do NM_PESSOA da FILIAL para sigla/nome filial
-      -- Busca Informação dos Clientes (Externos e Filiais)
+      -- LOG-595 - Inversï¿½o do NM_PESSOA da FILIAL para sigla/nome filial
+      -- Busca Informaï¿½ï¿½o dos Clientes (Externos e Filiais)
       CURSOR C_CLIENTE IS
          SELECT 1 CD_EMPRESA,
                 '001' CD_DEPOSITO,
@@ -771,7 +772,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          P_REC_CLIENTE.FILLER_3          := R_CLIENTE.FILLER_3;
          P_REC_CLIENTE.FILLER_4          := R_CLIENTE.FILLER_4;
          P_REC_CLIENTE.FILLER_5          := R_CLIENTE.FILLER_5;
-         -- Busca dados endereço cadastral do cliente
+         -- Busca dados endereï¿½o cadastral do cliente
          OPEN C_END(R_CLIENTE.CD_CLIENTE);
          FETCH C_END
             INTO R_END;
@@ -815,7 +816,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                                P_CD_DEP_WMS IN VARCHAR2) IS
       -- Declara rowtype para insert
       P_REC_FORNEC WMS.INT_E_FORNECEDOR%ROWTYPE;
-      -- Busca Informação dos fornecedores
+      -- Busca Informaï¿½ï¿½o dos fornecedores
       CURSOR C_FORNEC IS
          SELECT 1 CD_EMPRESA,
                 '001' CD_DEPOSITO,
@@ -909,10 +910,10 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
    -- Dados de Transportadora no WMS --
    PROCEDURE PR_GRV_TRANSP(P_ID_TRANSP  IN GC.PESSOA.ID_PESSOA%TYPE,
                            P_CD_DEP_WMS IN VARCHAR2) IS
-      -- P_cd_dep_wms já deve vir com LPAD aplicado
+      -- P_cd_dep_wms jï¿½ deve vir com LPAD aplicado
       -- Declara rowtype para insert
       P_REC_TRANSP WMS.INT_E_TRANSPORTADORA%ROWTYPE;
-      -- Busca Informação dos fornecedores
+      -- Busca Informaï¿½ï¿½o dos fornecedores
       CURSOR C_TRANSP IS
          SELECT 1 CD_EMPRESA,
                 '001' CD_DEPOSITO,
@@ -1021,7 +1022,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       -- Busca os dados da Nota Fiscal para Recebimento
       CURSOR C_NF IS
          SELECT 1 CD_EMPRESA,
-                NULL CD_AGENDA, -- a agenda será controlada pelo WMS
+                NULL CD_AGENDA, -- a agenda serï¿½ controlada pelo WMS
                 NFT.NR_NF NU_NOTA,
                 NFT.DS_SER NU_SERIE_NOTA,
                 NULL CD_TRANSPORTADORA,
@@ -1032,7 +1033,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 TO_CHAR(NFT.DT_EMIS, 'DD/MM/YYYY HH24:MI:SS') DT_EMISSAO,
                 NFT.DS_PLACA DS_PLACA,
                 TO_CHAR(NVL(NFT.DT_INIC_DES, SYSDATE), 'DD/MM/YYYY HH24:MI:SS') DT_AGENDAMENTO,
-                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSÃO / 2 - CANCELAMENTO
+                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSï¿½O / 2 - CANCELAMENTO
                 NVL(NTN.CD_TIPO_NF_WMS, 'FRN') CD_TIPO_NOTA,
                 NFT.ID_GUIA_LIB_GLB NU_DOC_ERP,
                 NULL CD_RAV,
@@ -1070,9 +1071,9 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                                AND CNFR.ID_GUIA_LIB_GLB = NFT.ID_GUIA_LIB_GLB
                                AND CNFR.ID_RECEBIDO NOT IN ('C','E')) -- CANCELADO / ERRO
          UNION
-         -- union para busca NFs de Saida que serão recebidas no CD Extrema-
+         -- union para busca NFs de Saida que serï¿½o recebidas no CD Extrema-
          SELECT 1 CD_EMPRESA,
-                NULL CD_AGENDA, -- a agenda será controlada pelo WMS
+                NULL CD_AGENDA, -- a agenda serï¿½ controlada pelo WMS
                 NFS.NR_NF NU_NOTA,
                 NFS.DS_SER NU_SERIE_NOTA,
                 NULL CD_TRANSPORTADORA,
@@ -1083,7 +1084,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 TO_CHAR(NFS.DT_EMIS, 'DD/MM/YYYY HH24:MI:SS') DT_EMISSAO,
                 NFS.DS_PLACA DS_PLACA,
                 TO_CHAR(NVL(NFS.DT_INIC_DES, SYSDATE), 'DD/MM/YYYY HH24:MI:SS') DT_AGENDAMENTO,
-                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSÃO / 2 - CANCELAMENTO
+                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSï¿½O / 2 - CANCELAMENTO
                 NVL(NTN.CD_TIPO_NF_WMS, 'TRF') CD_TIPO_NOTA,
                 NFS.ID_GUIA_LIB_GLB NU_DOC_ERP,
                 NULL CD_RAV,
@@ -1122,7 +1123,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       --
       CURSOR C_NFE IS
          SELECT 1 CD_EMPRESA,
-                NULL CD_AGENDA, -- a agenda será controlada pelo WMS
+                NULL CD_AGENDA, -- a agenda serï¿½ controlada pelo WMS
                 NFE.NR_NF NU_NOTA,
                 NFE.DS_SER NU_SERIE_NOTA,
                 TO_CHAR(NFE.DT_EMIS, 'DD/MM/YYYY HH24:MI:SS') DT_EMISSAO,
@@ -1130,9 +1131,9 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 P.ID_PESSOA CD_FORNECEDOR,
                 P.ID_CGC CD_CNPJ_FORNECEDOR,
                 TO_CHAR(NVL(NFE.DT_INIC_DES, SYSDATE), 'DD/MM/YYYY HH24:MI:SS') DT_AGENDAMENTO,
-                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSÃO / 2 - CANCELAMENTO
+                DECODE(P_ID_AUTORIZA, 'S', 1, 2) CD_SITUACAO, -- 1 - INCLUSï¿½O / 2 - CANCELAMENTO
                 NVL(NTN.CD_TIPO_NF_WMS, 'DEV') CD_TIPO_NOTA,
-                NFE.NR_NF NU_DOC_ERP, -- nfe não possui Guia de liberação, grava NR_NF - campo obrig no WMS
+                NFE.NR_NF NU_DOC_ERP, -- nfe nï¿½o possui Guia de liberaï¿½ï¿½o, grava NR_NF - campo obrig no WMS
                 NULL FILLER_1,
                 NULL FILLER_2,
                 NULL FILLER_3,
@@ -1221,7 +1222,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             PR_GRV_DET_NOTA_FISCAL(R_NF.TP_NF, R_NF.CD_FIL_NF, P_REC_CABNF);
             --
             IF R_NF.CD_SITUACAO = 1 THEN
-               -- INCLUSÃO
+               -- INCLUSï¿½O
                PR_INS_CTR_NF_RECEB(R_NF.TP_NF, R_NF.ID_LOCAL_DES, R_NF.CD_FIL_ESTQ_DES, R_NF.DT_INIC_DES, P_REC_CABNF);
                -- Chama Procedure Insere o Fornecedor(emitente) NF
                IF V_ENVIA_FORN = 'S' THEN
@@ -1271,7 +1272,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             PR_GRV_DET_NOTA_FISCAL(R_NFE.TP_NF, R_NFE.CD_FIL_NF, P_REC_CABNF);
             --
             IF R_NFE.CD_SITUACAO = 1 THEN
-               -- INCLUSÃO
+               -- INCLUSï¿½O
                PR_INS_CTR_NF_RECEB(R_NFE.TP_NF,
                                    R_NFE.ID_LOCAL_DES,
                                    R_NFE.CD_FIL_ESTQ_DES,
@@ -1362,7 +1363,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                 NULL          NU_LOTE,
                 NULL          NU_LOTE_FORNECEDOR,
                 NULL          DT_FABRICACAO,
-                NULL          DS_AREA_ERP, -- ver se hávera tratamento de retorno neste caso
+                NULL          DS_AREA_ERP, -- ver se hï¿½vera tratamento de retorno neste caso
                 NULL          FILLER_1,
                 NULL          FILLER_2,
                 NULL          FILLER_3,
@@ -1442,7 +1443,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
    END PR_GRV_DET_NOTA_FISCAL;
    -------
    --
-   -- Processo chamado das telas/processo de liberação Romaneio que aciona as procedures popular
+   -- Processo chamado das telas/processo de liberaï¿½ï¿½o Romaneio que aciona as procedures popular
    --   as interfaces de INT_E de PEDIDO_SAIDA de acordo com o tipo de romaneio
    --   P_FIL_ROMANEIO/P_NR_ROMANEIO/P_DT_ROMANEIO - Dados do Romaneio
    --   P_TP_ROMANEIO - PDS / GUIA / REQ / POS / RUC
@@ -1456,7 +1457,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                                     P_TP_AGRUPA    IN VARCHAR2,
                                     P_NR_AGRUPA    IN NUMBER,
                                     P_CD_SITUACAO  IN NUMBER) IS
-      -- define as procedures que serão acionadas para gerar as informações nas tabelas de envio de PEDIDO_SAIDA
+      -- define as procedures que serï¿½o acionadas para gerar as informaï¿½ï¿½es nas tabelas de envio de PEDIDO_SAIDA
    BEGIN
       IF P_FIL_ROMANEIO IS NOT NULL AND
          P_NR_ROMANEIO IS NOT NULL THEN
@@ -1470,17 +1471,17 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             BEGIN
               GC.PCK_FALTA_ROM_WMS.PR_AVALIA_FALTA_ROM(P_FIL_ROMANEIO, P_NR_ROMANEIO);
             END;
-            -- Romaneio de Guia de Liberação de Pedido Entrega Terceiro
+            -- Romaneio de Guia de Liberaï¿½ï¿½o de Pedido Entrega Terceiro
             PR_PEDIDO_GUIA(P_FIL_ROMANEIO, P_NR_ROMANEIO, P_TP_AGRUPA, P_NR_AGRUPA, P_CD_SITUACAO);
          ELSIF P_TP_ROMANEIO = 'REQ' THEN
-            -- Romaneio de Requisição de Abastecimento Loja e Pedido Retira Loja
+            -- Romaneio de Requisiï¿½ï¿½o de Abastecimento Loja e Pedido Retira Loja
             PR_PEDIDO_REQ(P_FIL_ROMANEIO, P_NR_ROMANEIO, P_TP_AGRUPA, P_NR_AGRUPA, P_CD_SITUACAO);
          ELSIF P_TP_ROMANEIO = 'POS' THEN
-            -- Romaneio de Requisição de POS e Requisição Interna com POS
+            -- Romaneio de Requisiï¿½ï¿½o de POS e Requisiï¿½ï¿½o Interna com POS
             PR_PEDIDO_POS(P_FIL_ROMANEIO, P_NR_ROMANEIO, P_TP_AGRUPA, P_NR_AGRUPA, P_CD_SITUACAO);
          ELSIF P_TP_ROMANEIO = 'RUC' THEN
             IF P_DT_ROMANEIO IS NOT NULL THEN
-               -- Romaneio de Requisição de Uso e Consumo
+               -- Romaneio de Requisiï¿½ï¿½o de Uso e Consumo
                PR_PEDIDO_RUC(P_FIL_ROMANEIO, P_NR_ROMANEIO, P_DT_ROMANEIO, P_CD_SITUACAO);
             ELSE
                RAISE_APPLICATION_ERROR (-20001, 'DT_GERA<' || P_DT_ROMANEIO ||'> '|| 'DEVE SER INFORMADO PARA REQUISICAO USO CONSUMO.');
@@ -1505,7 +1506,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           WHERE P.ID_PESSOA = P_ID_PESSOA
             AND P.CD_FIL_TOK IS NULL
          UNION
-         -- LOG-595 - Inversão do NM_PESSOA da FILIAL para sigla/nome filial
+         -- LOG-595 - Inversï¿½o do NM_PESSOA da FILIAL para sigla/nome filial
          SELECT F.SG_FIL || ' - ' || F.NM_FIL NM_PESSOA,
                 P.ID_CGC                      ID_CPF_CGC,
                 P.CD_FIL_TOK                  CD_FIL_TOK
@@ -1531,7 +1532,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                            P_CD_SITUACAO  IN NUMBER) IS
       -- Busca os PDS agrupados no Romaneio
       -- 07/12/2020 Helena - Retirado a busca do ID_FROD na FROD para enviar como CD_ROTA - Retorno cursor original
-      -- 31/03/2021 LOG-520 - LBUENO - Inclusão do ID_FROD na FROD para enviar como CD_ROTA
+      -- 31/03/2021 LOG-520 - LBUENO - Inclusï¿½o do ID_FROD na FROD para enviar como CD_ROTA
       CURSOR C_PDS(P_FIL IN NUMBER,
                    P_ROM IN NUMBER) IS
          SELECT RSGP.ID_PDS,
@@ -1561,7 +1562,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       CURSOR C_ITEM_PED(P_FIL IN NUMBER,
                         P_ROM IN NUMBER,
                         P_PDS IN NUMBER) IS
-         -- seleção PVD
+         -- seleï¿½ï¿½o PVD
          SELECT 'PVD'              TP_DOCTO,
                 PVD.DT_EMIS        DT_DOCTO,
                 PVD.CD_FIL         CD_FIL_DOCTO,
@@ -1605,7 +1606,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND TRPS.ID_ROM = P_ROM
             AND TRPS.ID_PDS = P_PDS
          UNION
-         -- seleção POS
+         -- seleï¿½ï¿½o POS
          SELECT 'POS'              TP_DOCTO,
                 PSO.DT_EMIS        DT_DOCTO,
                 PSO.CD_FIL         CD_FIL_DOCTO,
@@ -1640,7 +1641,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND TRPS.ID_ROM     = P_ROM
             AND TRPS.ID_PDS     = P_PDS
          UNION
-         -- seleção SPV
+         -- seleï¿½ï¿½o SPV
          SELECT 'SPV'                 TP_DOCTO,
                 SPV.DT_EMIS           DT_DOCTO,
                 SPV.CD_FIL            CD_FIL_DOCTO,
@@ -1679,7 +1680,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- incluir ID_TGE para ordenar corretamente - Qdo 2 ID_TGE do mesmo pedido vir no Romaneio/pds
       R_ITEM_PED C_ITEM_PED%ROWTYPE;
       --
-      -- Região com base no pds para concatenação com o campo DS_PROGRAM_DIARIA_SERVICO
+      -- Regiï¿½o com base no pds para concatenaï¿½ï¿½o com o campo DS_PROGRAM_DIARIA_SERVICO
       CURSOR C_REG(P_ID_PDS PDS.ID_PDS%TYPE) IS
         SELECT RSE.SG_RSE
           FROM REGIAO_SERVICO RSE,
@@ -1721,7 +1722,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND C.SG_PAIS     = EP.SG_PAIS_CID;
       R_END_ENTR C_END_ENTR%ROWTYPE;
       --
-      -- busca UF se não vier o ID_ENDER_EEC prenchido
+      -- busca UF se nï¿½o vier o ID_ENDER_EEC prenchido
       CURSOR C_UF (P_PESSOA IN NUMBER) IS
          SELECT EP.SG_ESTADO_CID  SG_ESTADO
            FROM ENDERECO_PESSOA EP
@@ -1752,7 +1753,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       V_CD_FIL_TOK           PESSOA.CD_FIL_TOK%TYPE;
       --
    BEGIN
-      -- busca o deposito WMS associado à Filial (DP/DS) do GC
+      -- busca o deposito WMS associado ï¿½ Filial (DP/DS) do GC
       V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_FIL_ROMANEIO);
       --
       OPEN C_PDS(P_FIL_ROMANEIO, P_NR_ROMANEIO);
@@ -1781,7 +1782,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- REINICIALIZA O CONTADOR DE ITENS DO PEDIDO
                V_NU_CTRL_ITEM  := 0;
                --
-               -- verifica se já existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
+               -- verifica se jï¿½ existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
                V_NU_PED_ORIGEM := WMS.PCK_CTRL_PEDIDO_SAIDA.FC_BUSCA_PED_ORIGEM(R_ITEM_PED.CD_FIL_DOCTO,
                                                                                 R_ITEM_PED.NR_DOCTO,
                                                                                 R_ITEM_PED.TP_DOCTO,
@@ -1795,7 +1796,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   -- gera o registro para relacionar o romaneio/req.uso consumo da filial
                   P_RELAC_PED                  := NULL;
                   P_RELAC_PED.NU_PEDIDO_ORIGEM := NULL;
-                  -- todos tipos de pedidos GC (PVD/SPV/POS) gerados no PDS serão tratados como PVP (Pedido Venda - Transp. Propria) no WMS - pois seguirao o mesmo fluxo
+                  -- todos tipos de pedidos GC (PVD/SPV/POS) gerados no PDS serï¿½o tratados como PVP (Pedido Venda - Transp. Propria) no WMS - pois seguirao o mesmo fluxo
                   P_RELAC_PED.TP_PEDIDO_WMS    := 'PVP';
                   P_RELAC_PED.CD_FIL_DOCTO     := R_ITEM_PED.CD_FIL_DOCTO;
                   P_RELAC_PED.NR_DOCTO         := R_ITEM_PED.NR_DOCTO;
@@ -1809,7 +1810,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   -- Insere registro com relacionamento do PED/REQ GC com Pedido WMS
                   WMS.PCK_CTRL_PEDIDO_SAIDA.PR_INS_RELACIONA_PEDIDOS(P_RELAC_PED);
                ELSE
-                  -- é reenvio do pedido para o WMS - já possui Pedido Origem gerado e deve manter o mesmo
+                  -- ï¿½ reenvio do pedido para o WMS - jï¿½ possui Pedido Origem gerado e deve manter o mesmo
                   P_RELAC_PED                  := NULL;
                   P_RELAC_PED.NU_PEDIDO_ORIGEM := V_NU_PED_ORIGEM;
                   P_RELAC_PED.TP_PEDIDO_WMS    := 'PVP';
@@ -1818,7 +1819,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Chama Procedure Insere o cliente
                PR_GRV_CLIENTE(R_ITEM_PED.CD_CLIENTE, V_CD_DEP_WMS);
                --
-               -- Busco região do PDS
+               -- Busco regiï¿½o do PDS
                OPEN C_REG(R_PDS.ID_PDS);
                FETCH C_REG INTO R_REG;
                CLOSE C_REG;
@@ -1826,22 +1827,22 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Gerar o registro do cabecalho do Pedido Saida
                P_REC_CABPED := NULL;
                --
-               P_REC_CABPED.NU_SEQ           := NULL; -- será gerado no PR_INS_CAB_PEDIDO_SAIDA
+               P_REC_CABPED.NU_SEQ           := NULL; -- serï¿½ gerado no PR_INS_CAB_PEDIDO_SAIDA
                P_REC_CABPED.CD_EMPRESA       := 1;
                P_REC_CABPED.CD_DEPOSITO      := V_CD_DEP_WMS;
                P_REC_CABPED.NU_PEDIDO_ORIGEM := P_RELAC_PED.NU_PEDIDO_ORIGEM;
                P_REC_CABPED.CD_CLIENTE       := R_ITEM_PED.CD_CLIENTE;
                --
-               -- 20/10/2020 - LOG-365 Incluido campos para passagem das informações de PDS e PLACA do caminhao roteirizado
+               -- 20/10/2020 - LOG-365 Incluido campos para passagem das informaï¿½ï¿½es de PDS e PLACA do caminhao roteirizado
                P_REC_CABPED.DS_PROGRAM_DIARIA_SERVICO   := R_PDS.ID_PDS||'-'||R_REG.SG_RSE;
                P_REC_CABPED.DS_PLACA                    := R_PDS.NR_PLACA;
                --
                -- 20/11/2020 - LOG-441 - Envio ID_FROD como rota
                -- 07/12/2020 - retirar o envio do ID_FROD (R_PDS.CD_ROTA) como rota
-               -- 31/03/2021 LOG-520 - LBUENO - Inclusão do ID_FROD na FROD para enviar como CD_ROTA
+               -- 31/03/2021 LOG-520 - LBUENO - Inclusï¿½o do ID_FROD na FROD para enviar como CD_ROTA
                P_REC_CABPED.CD_ROTA          := R_PDS.CD_ROTA;
                P_REC_CABPED.DT_ENTRADA       := R_ITEM_PED.DT_ENTRADA;
-               -- 04/01/2021 - Ajuste montagem Carga - Passando a Sigla da Praca da região + Sequencia por pedido no lugar do P_NR_ROMANEIO
+               -- 04/01/2021 - Ajuste montagem Carga - Passando a Sigla da Praca da regiï¿½o + Sequencia por pedido no lugar do P_NR_ROMANEIO
                --              P_REC_CABPED.CD_CARGA         := P_NR_ROMANEIO;
                BEGIN
                   SELECT SUBSTR(R_REG.SG_RSE,1,4)|| GC.SEQ_CARGA_PVP_WMS.NEXTVAL
@@ -1877,7 +1878,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   P_REC_CABPED.CD_UF_ENTREGA          := R_END_ENTR.CD_UF;
                   P_REC_CABPED.CD_CEP_ENTREGA         := R_END_ENTR.CD_CEP;
                ELSE
-                  -- Busca a sigla do estado do cliente - informação obrigatoria no wms
+                  -- Busca a sigla do estado do cliente - informaï¿½ï¿½o obrigatoria no wms
                   OPEN C_UF (R_ITEM_PED.CD_CLIENTE);
                   FETCH C_UF
                      INTO R_UF;
@@ -1892,8 +1893,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                      INTO R_TGE;
                   CLOSE C_TGE;
                   --
-                  --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para não utilizar ORDER_ID - que estoura para MercadoLivre
-                  --20/11/2020 - LOG-439 - Mudança ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
+                  --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para nï¿½o utilizar ORDER_ID - que estoura para MercadoLivre
+                  --20/11/2020 - LOG-439 - Mudanï¿½a ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
                   --P_REC_CABPED.NU_DOC_ERP := R_TGE.ORDER_ID || R_TGE.ORDER_FF;
                   P_REC_CABPED.NU_DOC_ERP := LPAD(R_ITEM_PED.CD_FIL_DOCTO, 3, '0') || TO_CHAR(R_ITEM_PED.DT_DOCTO, 'DDMMYYYY')||
                                              LPAD(R_ITEM_PED.NR_DOCTO, 7, '0') || R_TGE.ORDER_FF;
@@ -1915,7 +1916,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   P_REC_CABPED.CD_CNPJ_TRANSPORTADORA := 0;
                   P_REC_CABPED.DS_TRANSPORTADORA      := NULL;
                END IF;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_CABPED.DT_FATURAMENTO     := NULL;
                P_REC_CABPED.NU_OBJETO_POSTAGEM := NULL;
                --
@@ -1923,7 +1924,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                PR_INS_CAB_PEDIDO_SAIDA(P_REC_CABPED);
             END IF; -- V_NR_PVD_ANT IS NULL OR...
             --
-            -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
+            -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
             -- Verifica se gera a linha do SKU por Qtde Total ou por Unidade
             IF V_AGRUPA_QTDE_POR_SKU = 'S' THEN
                V_NU_CTRL_ITEM := NVL(V_NU_CTRL_ITEM,0) + 1;
@@ -1944,7 +1945,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_DETPED.DS_AREA_ERP           := NULL;
                P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_DETPED.NU_NOTA        := NULL;
                P_REC_DETPED.NU_SERIE_NOTA  := NULL;
                P_REC_DETPED.CFOP           := NULL;
@@ -1973,7 +1974,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   P_REC_DETPED.DS_AREA_ERP           := NULL;
                   P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                   P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-                  -- Só serão preenchidos depois de realizado o faturamento do pedido
+                  -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                   P_REC_DETPED.NU_NOTA               := NULL;
                   P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                   P_REC_DETPED.CFOP                  := NULL;
@@ -2006,12 +2007,12 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                             P_NR_AGRUPA    IN NUMBER,
                             P_CD_SITUACAO  IN NUMBER) IS
       -- LOG-389 Alteracao da procedure de PVT - CARGA
-      -- Data 14/10 - não popular o CD_CARGA
+      -- Data 14/10 - nï¿½o popular o CD_CARGA
 
       -- busca os Pedidos/Itens no romaneio gerado
-      -- neste cenário não foi considerado
-      --      SPV - pois em entrega Terceiro não há itens de PSV para acompanhar
-      --      POS - não não há ocorrencias na tabela RGVI - e no processo de GUIA só trata PEDIDO DE VENDA entrega Terceiros
+      -- neste cenï¿½rio nï¿½o foi considerado
+      --      SPV - pois em entrega Terceiro nï¿½o hï¿½ itens de PSV para acompanhar
+      --      POS - nï¿½o nï¿½o hï¿½ ocorrencias na tabela RGVI - e no processo de GUIA sï¿½ trata PEDIDO DE VENDA entrega Terceiros
       CURSOR C_ITEM_PED(P_FIL IN NUMBER,
                         P_ROM IN NUMBER) IS
          SELECT 'PVD'              TP_DOCTO,
@@ -2061,7 +2062,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND IGES.NR_PV_IPV   = IPV.NR_PV
             AND IGES.ID_PROD_IPV = IPV.ID_PROD
             AND IGES.NR_ITEM_IPV = IPV.NR_ITEM
-            -- incluido para não entrar produtos que não puderam ser romaneados e não gera INT_E_DET 22/01 - HMatsui
+            -- incluido para nï¿½o entrar produtos que nï¿½o puderam ser romaneados e nï¿½o gera INT_E_DET 22/01 - HMatsui
             AND NVL(IGES.QT_PROGR_IPV,0) <> 0
                --
             AND CLR.CD_FIL_IPV  = IPV.CD_FIL
@@ -2113,7 +2114,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND C.SG_ESTADO        = EP.SG_ESTADO_CID
             AND C.SG_PAIS          = EP.SG_PAIS_CID;
       R_END_ENTR C_END_ENTR%ROWTYPE;
-      -- busca UF se não vier o ID_ENDER_EEC preenchido
+      -- busca UF se nï¿½o vier o ID_ENDER_EEC preenchido
       CURSOR C_UF (P_PESSOA IN NUMBER) IS
          SELECT EP.SG_ESTADO_CID  SG_ESTADO
            FROM ENDERECO_PESSOA EP
@@ -2144,7 +2145,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       V_CD_FIL_TOK           PESSOA.CD_FIL_TOK%TYPE;
       --
    BEGIN
-      -- busca o deposito WMS associado à Filial (DP/DS) do GC
+      -- busca o deposito WMS associado ï¿½ Filial (DP/DS) do GC
       V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_FIL_ROMANEIO);
       --
       -- Retorna os pedidos/itens tratados no romaneio
@@ -2167,7 +2168,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- REINICIALIZA O CONTADOR DE ITENS DO PEDIDO
             V_NU_CTRL_ITEM  := 0;
             --
-            -- verifica se já existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
+            -- verifica se jï¿½ existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
             V_NU_PED_ORIGEM := WMS.PCK_CTRL_PEDIDO_SAIDA.FC_BUSCA_PED_ORIGEM(R_ITEM_PED.CD_FIL_DOCTO,
                                                                              R_ITEM_PED.NR_DOCTO,
                                                                              R_ITEM_PED.TP_DOCTO,
@@ -2181,7 +2182,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- gera o registro para relacionar o romaneio/req.uso consumo da filial
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := NULL;
-               -- todos tipos de pedidos GC (PVD) gerados na Guia serão tratados como PVT (Pedido - Transp. Terceiro) no WMS - pois seguirao o mesmo fluxo
+               -- todos tipos de pedidos GC (PVD) gerados na Guia serï¿½o tratados como PVT (Pedido - Transp. Terceiro) no WMS - pois seguirao o mesmo fluxo
                P_RELAC_PED.TP_PEDIDO_WMS    := 'PVT';
                P_RELAC_PED.CD_FIL_DOCTO     := R_ITEM_PED.CD_FIL_DOCTO;
                P_RELAC_PED.NR_DOCTO         := R_ITEM_PED.NR_DOCTO;
@@ -2195,7 +2196,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Insere registro com relacionamento do PED/REQ GC com Pedido WMS
                WMS.PCK_CTRL_PEDIDO_SAIDA.PR_INS_RELACIONA_PEDIDOS(P_RELAC_PED);
             ELSE
-               -- é reenvio do pedido para o WMS - já possui Pedido Origem gerado e deve manter o mesmo
+               -- ï¿½ reenvio do pedido para o WMS - jï¿½ possui Pedido Origem gerado e deve manter o mesmo
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := V_NU_PED_ORIGEM;
                P_RELAC_PED.TP_PEDIDO_WMS    := 'PVT';
@@ -2207,14 +2208,14 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- Gerar o registro do cabecalho do Pedido Saida
             P_REC_CABPED := NULL;
             --
-            P_REC_CABPED.NU_SEQ           := NULL; -- será gerado no PR_INS_CAB_PEDIDO_SAIDA
+            P_REC_CABPED.NU_SEQ           := NULL; -- serï¿½ gerado no PR_INS_CAB_PEDIDO_SAIDA
             P_REC_CABPED.CD_EMPRESA       := 1;
             P_REC_CABPED.CD_DEPOSITO      := V_CD_DEP_WMS;
             P_REC_CABPED.NU_PEDIDO_ORIGEM := P_RELAC_PED.NU_PEDIDO_ORIGEM;
             P_REC_CABPED.CD_CLIENTE       := R_ITEM_PED.CD_CLIENTE;
             --
             P_REC_CABPED.DT_ENTRADA       := R_ITEM_PED.DT_ENTRADA;
-            -- LOG-389 - não popular CD_CARGA com ID Romaneio
+            -- LOG-389 - nï¿½o popular CD_CARGA com ID Romaneio
             --P_REC_CABPED.CD_CARGA         := P_NR_ROMANEIO;
             P_REC_CABPED.CD_SITUACAO      := P_CD_SITUACAO;
             P_REC_CABPED.TP_PEDIDO        := P_RELAC_PED.TP_PEDIDO_WMS;
@@ -2248,7 +2249,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_CABPED.CD_UF_ENTREGA          := R_END_ENTR.CD_UF;
                P_REC_CABPED.CD_CEP_ENTREGA         := R_END_ENTR.CD_CEP;
             ELSE
-               -- Busca a sigla do estado do cliente - informação obrigatoria no wms
+               -- Busca a sigla do estado do cliente - informaï¿½ï¿½o obrigatoria no wms
                OPEN C_UF (R_ITEM_PED.CD_CLIENTE);
                FETCH C_UF
                   INTO R_UF;
@@ -2263,8 +2264,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   INTO R_TGE;
                CLOSE C_TGE;
                --
-               --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para não utilizar ORDER_ID - que estoura para MercadoLivre
-               --20/11/2020 - LOG-439 - Mudança ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
+               --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para nï¿½o utilizar ORDER_ID - que estoura para MercadoLivre
+               --20/11/2020 - LOG-439 - Mudanï¿½a ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
                --P_REC_CABPED.NU_DOC_ERP := R_TGE.ORDER_ID || R_TGE.ORDER_FF;
                P_REC_CABPED.NU_DOC_ERP := LPAD(R_ITEM_PED.CD_FIL_DOCTO, 3, '0') || TO_CHAR(R_ITEM_PED.DT_DOCTO , 'DDMMYYYY')||
                                           LPAD(R_ITEM_PED.NR_DOCTO , 7, '0') || R_TGE.ORDER_FF;
@@ -2290,7 +2291,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_CABPED.CD_CNPJ_TRANSPORTADORA := 0;
                P_REC_CABPED.DS_TRANSPORTADORA      := NULL;
             END IF; -- ID_TGE
-            -- Só serão preenchidos depois de realizado o faturamento do pedido
+            -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
             P_REC_CABPED.DT_FATURAMENTO     := NULL;
             P_REC_CABPED.NU_OBJETO_POSTAGEM := NULL;
             P_REC_CABPED.DS_PLACA           := NULL;
@@ -2299,7 +2300,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             PR_INS_CAB_PEDIDO_SAIDA(P_REC_CABPED);
          END IF; -- V_NR_PVD_ANT IS NULL OR...
          --
-         -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
+         -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
          -- Verifica se gera a linha do SKU por Qtde Total ou por Unidade
          IF V_AGRUPA_QTDE_POR_SKU = 'S' THEN
             V_NU_CTRL_ITEM := NVL(V_NU_CTRL_ITEM,0) + 1;
@@ -2318,10 +2319,10 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             P_REC_DETPED.NU_PEDIDO             := NULL;
             P_REC_DETPED.ID_EMBALAGEM_PRESENTE := 'N';
             P_REC_DETPED.DS_AREA_ERP           := NULL;
-            -- LOG-389 - não popular CD_CARGA com ID Romaneio
+            -- LOG-389 - nï¿½o popular CD_CARGA com ID Romaneio
             --P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
             P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-            -- Só serão preenchidos depois de realizado o faturamento do pedido
+            -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
             P_REC_DETPED.NU_NOTA               := NULL;
             P_REC_DETPED.NU_SERIE_NOTA         := NULL;
             P_REC_DETPED.CFOP                  := NULL;
@@ -2350,7 +2351,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_DETPED.DS_AREA_ERP           := NULL;
                P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_DETPED.NU_NOTA               := NULL;
                P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                P_REC_DETPED.CFOP                  := NULL;
@@ -2374,8 +2375,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --
    END PR_PEDIDO_GUIA;
 
-   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das Requisições de Abastecimento Loja / Pedidos Retira Loja
-   -- e gerar o PEDIDO_SAIDA para o WMS (Acessórios e Moveis)
+   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das Requisiï¿½ï¿½es de Abastecimento Loja / Pedidos Retira Loja
+   -- e gerar o PEDIDO_SAIDA para o WMS (Acessï¿½rios e Moveis)
    PROCEDURE PR_PEDIDO_REQ(P_FIL_ROMANEIO IN ROMANEIO_SEPARACAO.CD_FIL%TYPE,
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
                            P_TP_AGRUPA    IN VARCHAR2,
@@ -2384,7 +2385,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       -- busca os Pedidos/Itens do REQ (IRQ E IRT/IPV)
       CURSOR C_ITEM_REQ(P_FIL IN NUMBER,
                         P_ROM IN NUMBER) IS
-         -- seleção REQ - Filial
+         -- seleï¿½ï¿½o REQ - Filial
          SELECT 'REQ'              TP_PEDIDO_WMS,
                 'REQ'              TP_DOCTO,
                 REQ.DT_EMIS        DT_DOCTO,
@@ -2426,7 +2427,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND RSD.CD_FIL = P_FIL
             AND RSD.ID_ROM = P_ROM
          UNION
-         -- seleção REQ - PVD Retira
+         -- seleï¿½ï¿½o REQ - PVD Retira
          SELECT 'RET'              TP_PEDIDO_WMS,
                 'PVD'              TP_DOCTO,
                 PVD.DT_EMIS        DT_DOCTO,
@@ -2518,7 +2519,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND C.SG_PAIS = EP.SG_PAIS_CID;
       R_END_ENTR C_END_ENTR%ROWTYPE;
       --
-      -- busca UF da filial da requisição para abastecimento
+      -- busca UF da filial da requisiï¿½ï¿½o para abastecimento
       CURSOR C_UF (P_PESSOA IN NUMBER) IS
          SELECT EP.SG_ESTADO_CID  SG_ESTADO
            FROM ENDERECO_PESSOA EP
@@ -2559,7 +2560,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       V_CD_FIL_TOK           PESSOA.CD_FIL_TOK%TYPE;
       --
    BEGIN
-      -- busca o deposito WMS associado à Filial (DP/DS) do GC
+      -- busca o deposito WMS associado ï¿½ Filial (DP/DS) do GC
       V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_FIL_ROMANEIO);
       --
       -- Retorna os pedidos/itens tratados no romaneio
@@ -2582,7 +2583,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- REINICIALIZA O CONTADOR DE ITENS DO PEDIDO
             V_NU_CTRL_ITEM  := 0;
             --
-            -- verifica se já existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
+            -- verifica se jï¿½ existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
             V_NU_PED_ORIGEM := WMS.PCK_CTRL_PEDIDO_SAIDA.FC_BUSCA_PED_ORIGEM(R_ITEM_REQ.CD_FIL_DOCTO,
                                                                              R_ITEM_REQ.NR_DOCTO,
                                                                              R_ITEM_REQ.TP_DOCTO,
@@ -2596,7 +2597,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- gera o registro para relacionar o romaneio/req.uso consumo da filial
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := NULL;
-               -- todos tipos de pedidos GC (PVD/SPV/POS) gerados no PDS serão tratados como PVP (Pedido Venda - Transp. Propria) no WMS - pois seguirao o mesmo fluxo
+               -- todos tipos de pedidos GC (PVD/SPV/POS) gerados no PDS serï¿½o tratados como PVP (Pedido Venda - Transp. Propria) no WMS - pois seguirao o mesmo fluxo
                P_RELAC_PED.TP_PEDIDO_WMS    := R_ITEM_REQ.TP_PEDIDO_WMS;
                P_RELAC_PED.CD_FIL_DOCTO     := R_ITEM_REQ.CD_FIL_DOCTO;
                P_RELAC_PED.NR_DOCTO         := R_ITEM_REQ.NR_DOCTO;
@@ -2610,7 +2611,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Insere registro com relacionamento do PED/REQ GC com Pedido WMS
                WMS.PCK_CTRL_PEDIDO_SAIDA.PR_INS_RELACIONA_PEDIDOS(P_RELAC_PED);
             ELSE
-              -- é reenvio do pedido para o WMS - já possui Pedido Origem gerado e deve manter o mesmo
+              -- ï¿½ reenvio do pedido para o WMS - jï¿½ possui Pedido Origem gerado e deve manter o mesmo
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := V_NU_PED_ORIGEM;
                P_RELAC_PED.TP_PEDIDO_WMS    := R_ITEM_REQ.TP_PEDIDO_WMS;
@@ -2622,7 +2623,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- Gerar o registro do cabecalho do Pedido Saida
             P_REC_CABPED := NULL;
             --
-            P_REC_CABPED.NU_SEQ           := NULL; -- será gerado no PR_INS_CAB_PEDIDO_SAIDA
+            P_REC_CABPED.NU_SEQ           := NULL; -- serï¿½ gerado no PR_INS_CAB_PEDIDO_SAIDA
             P_REC_CABPED.CD_EMPRESA       := 1;
             P_REC_CABPED.CD_DEPOSITO      := V_CD_DEP_WMS;
             P_REC_CABPED.NU_PEDIDO_ORIGEM := P_RELAC_PED.NU_PEDIDO_ORIGEM;
@@ -2655,7 +2656,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                PR_BUSCA_DADOS_PESSOA(R_ITEM_REQ.ID_PESSOA_EEC, P_REC_CABPED.DS_CLIENTE_ENTREGA, V_AUX_CPF_CGC, V_CD_FIL_TOK);
             END IF;
             --
-            -- Busca a sigla do estado do cliente (Filial) - informação obrigatoria no wms
+            -- Busca a sigla do estado do cliente (Filial) - informaï¿½ï¿½o obrigatoria no wms
             OPEN C_UF (R_ITEM_REQ.CD_CLIENTE);
             FETCH C_UF
                INTO R_UF;
@@ -2669,8 +2670,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   INTO R_TGE;
                CLOSE C_TGE;
                --
-               --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para não utilizar ORDER_ID - que estoura para MercadoLivre
-               --20/11/2020 - LOG-439 - Mudança ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
+               --10/11/2020 - ajuste na montagem do NU_DOC_ERP - para nï¿½o utilizar ORDER_ID - que estoura para MercadoLivre
+               --20/11/2020 - LOG-439 - Mudanï¿½a ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
                --30/11/2020 - Ajuste no tam max do campo NR_DOCTO de 7 para 10
                --P_REC_CABPED.NU_DOC_ERP := R_TGE.ORDER_ID || R_TGE.ORDER_FF;
                P_REC_CABPED.NU_DOC_ERP := LPAD(R_ITEM_REQ.CD_FIL_DOCTO, 3, '0') || TO_CHAR(R_ITEM_REQ.DT_DOCTO, 'DDMMYYYY') ||
@@ -2684,7 +2685,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             P_REC_CABPED.CD_TRANSPORTADORA      := 'NC';
             P_REC_CABPED.CD_CNPJ_TRANSPORTADORA := 0;
             P_REC_CABPED.DS_TRANSPORTADORA      := NULL;
-            -- Só serão preenchidos depois de realizado o faturamento do pedido
+            -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
             P_REC_CABPED.DT_FATURAMENTO         := NULL;
             P_REC_CABPED.NU_OBJETO_POSTAGEM     := NULL;
             P_REC_CABPED.DS_PLACA               := NULL;
@@ -2693,7 +2694,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             PR_INS_CAB_PEDIDO_SAIDA(P_REC_CABPED);
          END IF; -- V_NR_PVD_ANT IS NULL OR...
             --
-            -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
+            -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
             -- Verifica se gera a linha do SKU por Qtde Total ou por Unidade
             IF V_AGRUPA_QTDE_POR_SKU = 'S' THEN
                V_NU_CTRL_ITEM := NVL(V_NU_CTRL_ITEM,0) + 1;
@@ -2714,7 +2715,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_DETPED.DS_AREA_ERP           := NULL;
                P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_DETPED.NU_NOTA               := NULL;
                P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                P_REC_DETPED.CFOP                  := NULL;
@@ -2743,7 +2744,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   P_REC_DETPED.DS_AREA_ERP           := NULL;
                   P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                   P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-                  -- Só serão preenchidos depois de realizado o faturamento do pedido
+                  -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                   P_REC_DETPED.NU_NOTA               := NULL;
                   P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                   P_REC_DETPED.CFOP                  := NULL;
@@ -2766,7 +2767,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                                  'INTERF. PEDIDO SAIDA REQ PARA WMS :' ||   'ERRO<' || D_SQLERRM || '> ');
 
    END PR_PEDIDO_REQ;
-   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das POS GERADAS - Requisições Interna entre Filiais e Outros
+   -- Procedure acionada por PR_LIBERA_SEPARACAO, para buscar os dados das POS GERADAS - Requisiï¿½ï¿½es Interna entre Filiais e Outros
    -- e gerar o PEDIDO_SAIDA para o WMS
    PROCEDURE PR_PEDIDO_POS(P_FIL_ROMANEIO IN ROMANEIO_SEPARACAO.CD_FIL%TYPE,
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
@@ -2833,7 +2834,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             AND C.SG_PAIS = EP.SG_PAIS_CID;
       R_END_ENTR C_END_ENTR%ROWTYPE;
       --
-      -- Busca o Indicador de Tipo de NF - Determina se é (V, D, T, E, O)
+      -- Busca o Indicador de Tipo de NF - Determina se ï¿½ (V, D, T, E, O)
       CURSOR C_TNF (P_IN_ENTR_SAI IN VARCHAR2,
                     P_CD_TP_NF    IN NUMBER) IS
          SELECT TNF.IN_TIPO_NF
@@ -2866,7 +2867,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       V_CD_FIL_TOK           PESSOA.CD_FIL_TOK%TYPE;
       --
    BEGIN
-      -- busca o deposito WMS associado à Filial (DP/DS) do GC
+      -- busca o deposito WMS associado ï¿½ Filial (DP/DS) do GC
       V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_FIL_ROMANEIO);
       --
       -- Retorna os pedidos/itens tratados no romaneio
@@ -2889,7 +2890,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- REINICIALIZA O CONTADOR DE ITENS DO PEDIDO
             V_NU_CTRL_ITEM  := 0;
             --
-            -- verifica se já existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
+            -- verifica se jï¿½ existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
             V_NU_PED_ORIGEM := WMS.PCK_CTRL_PEDIDO_SAIDA.FC_BUSCA_PED_ORIGEM(R_ITEM_POS.CD_FIL_DOCTO,
                                                                              R_ITEM_POS.NR_DOCTO,
                                                                              R_ITEM_POS.TP_DOCTO,
@@ -2906,7 +2907,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- Dados Cliente e Cliente Entrega
             PR_BUSCA_DADOS_PESSOA(R_ITEM_POS.CD_CLIENTE, V_DS_CLIENTE, V_AUX_CPF_CGC, V_CD_FIL_TOK);
             --
-            IF V_IN_TIPO_NF = 'D' THEN -- NF DEVOLUÇÃO
+            IF V_IN_TIPO_NF = 'D' THEN -- NF DEVOLUï¿½ï¿½O
                V_TP_PEDIDO_WMS := 'POD';
             ELSIF V_IN_TIPO_NF = 'V' THEN -- NF VENDA
                IF V_CD_FIL_TOK IS NULL THEN
@@ -2950,7 +2951,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Insere registro com relacionamento do PED/REQ GC com Pedido WMS
                WMS.PCK_CTRL_PEDIDO_SAIDA.PR_INS_RELACIONA_PEDIDOS(P_RELAC_PED);
             ELSE
-              -- é reenvio do pedido para o WMS - já possui Pedido Origem gerado e deve manter o mesmo
+              -- ï¿½ reenvio do pedido para o WMS - jï¿½ possui Pedido Origem gerado e deve manter o mesmo
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := V_NU_PED_ORIGEM;
                P_RELAC_PED.TP_PEDIDO_WMS    := V_TP_PEDIDO_WMS;
@@ -2962,7 +2963,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- Gerar o registro do cabecalho do Pedido Saida
             P_REC_CABPED := NULL;
             --
-            P_REC_CABPED.NU_SEQ           := NULL; -- será gerado no PR_INS_CAB_PEDIDO_SAIDA
+            P_REC_CABPED.NU_SEQ           := NULL; -- serï¿½ gerado no PR_INS_CAB_PEDIDO_SAIDA
             P_REC_CABPED.CD_EMPRESA       := 1;
             P_REC_CABPED.CD_DEPOSITO      := V_CD_DEP_WMS;
             P_REC_CABPED.NU_PEDIDO_ORIGEM := P_RELAC_PED.NU_PEDIDO_ORIGEM;
@@ -2998,14 +2999,14 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             P_REC_CABPED.CD_UF_ENTREGA          := R_END_ENTR.CD_UF;
             P_REC_CABPED.CD_CEP_ENTREGA         := R_END_ENTR.CD_CEP;
             --
-            --20/11/2020 - LOG-439 - Mudança ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
+            --20/11/2020 - LOG-439 - Mudanï¿½a ordem montagem de "FIL||NR_PV||DT EMS" Para "FIL ||DT EMIS||NR PV"
             P_REC_CABPED.NU_DOC_ERP := LPAD(R_ITEM_POS.CD_FIL_DOCTO, 3, '0') || TO_CHAR(R_ITEM_POS.DT_DOCTO, 'DDMMYYYY') ||
                                        LPAD(R_ITEM_POS.NR_DOCTO, 7, '0');
             --
             P_REC_CABPED.CD_TRANSPORTADORA      := 'NC';
             P_REC_CABPED.CD_CNPJ_TRANSPORTADORA := 0;
             P_REC_CABPED.DS_TRANSPORTADORA      := NULL;
-            -- Só serão preenchidos depois de realizado o faturamento do pedido
+            -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
             P_REC_CABPED.DT_FATURAMENTO     := NULL;
             P_REC_CABPED.NU_OBJETO_POSTAGEM := NULL;
             P_REC_CABPED.DS_PLACA           := NULL;
@@ -3014,7 +3015,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             PR_INS_CAB_PEDIDO_SAIDA(P_REC_CABPED);
          END IF; -- (V_NR_DOCTO_ANT IS NULL)
          --
-         -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
+         -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
          -- Verifica se gera a linha do SKU por Qtde Total ou por Unidade
          IF V_AGRUPA_QTDE_POR_SKU = 'S' THEN
             V_NU_CTRL_ITEM := NVL(V_NU_CTRL_ITEM,0) + 1;
@@ -3035,7 +3036,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             P_REC_DETPED.DS_AREA_ERP           := NULL;
             P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
             P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-            -- Só serão preenchidos depois de realizado o faturamento do pedido
+            -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
             P_REC_DETPED.NU_NOTA               := NULL;
             P_REC_DETPED.NU_SERIE_NOTA         := NULL;
             P_REC_DETPED.CFOP                  := NULL;
@@ -3064,7 +3065,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_DETPED.DS_AREA_ERP           := NULL;
                P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_DETPED.NU_NOTA               := NULL;
                P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                P_REC_DETPED.CFOP                  := NULL;
@@ -3094,7 +3095,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                            P_NR_ROMANEIO  IN ROMANEIO_SEPARACAO.ID_ROM%TYPE,
                            P_DT_ROMANEIO  IN ROMANEIO_SEPARACAO.DT_GERA%TYPE,
                            P_CD_SITUACAO  IN NUMBER) IS
-      -- LOG-595 - Inversão do NM_PESSOA da FILIAL para sigla/nome filial
+      -- LOG-595 - Inversï¿½o do NM_PESSOA da FILIAL para sigla/nome filial
       CURSOR C_RUC(P_FIL IN NUMBER,
                    P_ROM IN NUMBER,
                    P_DT  IN DATE) IS
@@ -3163,7 +3164,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       V_NU_CTRL_ITEM         INT_E_DET_PEDIDO_SAIDA.NU_CTRL_ITEM%TYPE;
       --
    BEGIN
-      -- busca o deposito WMS associado à Filial (DP/DS) do GC
+      -- busca o deposito WMS associado ï¿½ Filial (DP/DS) do GC
       V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_FIL_ROMANEIO);
       --
       OPEN C_RUC(P_FIL_ROMANEIO, P_NR_ROMANEIO, P_DT_ROMANEIO);
@@ -3172,7 +3173,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             INTO R_RUC;
          EXIT WHEN C_RUC%NOTFOUND;
          --
-         -- verifica se já existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
+         -- verifica se jï¿½ existe um numero gerado para o PVD/REQ/RUC/...na tabela DE/PARA
          V_NU_PED_ORIGEM := WMS.PCK_CTRL_PEDIDO_SAIDA.FC_BUSCA_PED_ORIGEM(R_RUC.CD_FIL,
                                                                           R_RUC.NR_REQ,
                                                                           'RUC',
@@ -3200,7 +3201,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                -- Insere registro com relacionamento do PED/REQ GC com Pedido WMS
                WMS.PCK_CTRL_PEDIDO_SAIDA.PR_INS_RELACIONA_PEDIDOS(P_RELAC_PED);
             ELSE
-               -- é reenvio do pedido para o WMS - já possui Pedido Origem gerado e deve manter o mesmo
+               -- ï¿½ reenvio do pedido para o WMS - jï¿½ possui Pedido Origem gerado e deve manter o mesmo
                P_RELAC_PED                  := NULL;
                P_RELAC_PED.NU_PEDIDO_ORIGEM := V_NU_PED_ORIGEM;
                P_RELAC_PED.TP_PEDIDO_WMS    := 'RUC';
@@ -3208,7 +3209,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
             -- Chama Procedure Insere o cliente
             PR_GRV_CLIENTE(R_RUC.CD_CLIENTE, V_CD_DEP_WMS);
 
-         -- Busca a sigla do estado da filial solicitante - informação obrigatoria no WMS
+         -- Busca a sigla do estado da filial solicitante - informaï¿½ï¿½o obrigatoria no WMS
          OPEN C_UF (R_RUC.CD_CLIENTE);
          FETCH C_UF
             INTO R_UF;
@@ -3216,7 +3217,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --
          -- Gerar o registro do cabecalho do Pedido Saida
          P_REC_CABPED                        := NULL;
-         P_REC_CABPED.NU_SEQ                 := NULL; -- será gerado no PR_INS_CAB_PEDIDO_SAIDA
+         P_REC_CABPED.NU_SEQ                 := NULL; -- serï¿½ gerado no PR_INS_CAB_PEDIDO_SAIDA
          P_REC_CABPED.CD_EMPRESA             := 1;
          P_REC_CABPED.CD_DEPOSITO            := V_CD_DEP_WMS;
          P_REC_CABPED.NU_PEDIDO_ORIGEM       := P_RELAC_PED.NU_PEDIDO_ORIGEM;
@@ -3235,7 +3236,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          P_REC_CABPED.DS_CLIENTE_ENTREGA     := R_RUC.DS_CLIENTE;
          P_REC_CABPED.DT_ENTRADA             := R_RUC.DT_ENTRADA;
          P_REC_CABPED.CD_UF_ENTREGA          := R_UF.SG_ESTADO;
-         -- Só serão preenchidos depois de realizado o faturamento do pedido
+         -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
          P_REC_CABPED.DT_FATURAMENTO         := NULL;
          P_REC_CABPED.NU_OBJETO_POSTAGEM     := NULL;
          P_REC_CABPED.DS_PLACA               := NULL;
@@ -3243,8 +3244,8 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --Chama Procedure Insere o Pedidpo Saida da RUC enviada no romaneio
          PR_INS_CAB_PEDIDO_SAIDA(P_REC_CABPED);
          --
-         -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
-         -- Inicializa o contator de itens do pedido para compor a chave de PK - quando não ira agrupar a qtde por SKU
+         -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
+         -- Inicializa o contator de itens do pedido para compor a chave de PK - quando nï¿½o ira agrupar a qtde por SKU
          V_NU_CTRL_ITEM := 0;
          --
          OPEN C_ITEM(P_FIL_ROMANEIO, P_NR_ROMANEIO, R_RUC.NR_REQ, R_RUC.CD_CCO);
@@ -3253,7 +3254,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                INTO R_ITEM;
             EXIT WHEN C_ITEM%NOTFOUND;
             --
-            -- Tratamento det da requisição/romaneio - Detalhes Pedido Saida
+            -- Tratamento det da requisiï¿½ï¿½o/romaneio - Detalhes Pedido Saida
             -- Verifica se gera a linha do SKU por Qtde Total ou por Unidade
             IF V_AGRUPA_QTDE_POR_SKU = 'S' THEN
                V_NU_CTRL_ITEM := NVL(V_NU_CTRL_ITEM,0) + 1;
@@ -3274,7 +3275,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                P_REC_DETPED.DS_AREA_ERP           := NULL;
                P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-               -- Só serão preenchidos depois de realizado o faturamento do pedido
+               -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                P_REC_DETPED.NU_NOTA               := NULL;
                P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                P_REC_DETPED.CFOP                  := NULL;
@@ -3303,7 +3304,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                   P_REC_DETPED.DS_AREA_ERP           := NULL;
                   P_REC_DETPED.CD_CARGA              := P_REC_CABPED.CD_CARGA;
                   P_REC_DETPED.NU_CTRL_ITEM          := V_NU_CTRL_ITEM;
-                  -- Só serão preenchidos depois de realizado o faturamento do pedido
+                  -- Sï¿½ serï¿½o preenchidos depois de realizado o faturamento do pedido
                   P_REC_DETPED.NU_NOTA               := NULL;
                   P_REC_DETPED.NU_SERIE_NOTA         := NULL;
                   P_REC_DETPED.CFOP                  := NULL;
@@ -3330,14 +3331,14 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
    END PR_PEDIDO_RUC;
    --
 
-   /*   -- Dados de Alterados do Pedido Saída no WMS --
+   /*   -- Dados de Alterados do Pedido Saï¿½da no WMS --
    PROCEDURE PROCEDURE PR_GRV_ALTERA_DADOS_PEDIDO (P_) IS
 
    BEGIN
 
    END PROCEDURE PR_GRV_ALTERA_DADOS_PEDIDO;*/
    --
-   -- Dados de Ajustes de Estoque - Movimentações Internas Depósito - WMS --
+   -- Dados de Ajustes de Estoque - Movimentaï¿½ï¿½es Internas Depï¿½sito - WMS --
    PROCEDURE PR_GRV_AJUSTE_ESTQ(P_NR_REQ      IN ITEM_REQ_INTERNA.NR_REQ%TYPE,
                                 P_AB_REQ      IN ITEM_REQ_INTERNA.AB_REQ%TYPE,
                                 P_CD_CCO      IN ITEM_REQ_INTERNA.CD_CCO%TYPE,
@@ -3347,7 +3348,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
                                 P_AREA_DEST   IN VARCHAR2,
                                 P_CD_SITUACAO IN NUMBER) IS
       --
-      -- OBJETIVO..: Popular a Interface para realizar o ajuste de Estoque - tarefa de movimentação entre Departamento(Areas) do Deposito ---
+      -- OBJETIVO..: Popular a Interface para realizar o ajuste de Estoque - tarefa de movimentaï¿½ï¿½o entre Departamento(Areas) do Deposito ---
       -- AUTOR/DATA: HELENA M. 31/07/2020
       -- ALTERACOES:
       --
@@ -3355,7 +3356,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
       --
       -- Declara rowtype para insert
       P_AJUSTE_ESTOQUE WMS.INT_E_AJUSTE_ESTOQUE%ROWTYPE;
-      -- Busca itens da Requisição Interna - Movimentacao no Deposito
+      -- Busca itens da Requisiï¿½ï¿½o Interna - Movimentacao no Deposito
       CURSOR C_IRI(P_NR_REQ IRI.NR_REQ%TYPE,
                    P_AB_REQ IRI.AB_REQ%TYPE,
                    P_CD_CCO IRI.CD_CCO%TYPE,
@@ -3390,7 +3391,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          -- Busca o Deposito WMS referente a filial GC
          V_CD_DEP_WMS := WMS.RET_DEP_WMS_FILIAL(P_CD_FIL);
          --
-         -- Busca itens da Requisição interna com Qtde Pendente
+         -- Busca itens da Requisiï¿½ï¿½o interna com Qtde Pendente
          OPEN C_IRI(P_NR_REQ, P_AB_REQ, P_CD_CCO, P_CD_FIL, P_ID_ROM);
          LOOP
             FETCH C_IRI
@@ -3444,7 +3445,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --
    END PR_GRV_AJUSTE_ESTQ;
    --
-   -- Dados de Transportadora Rota no WMS -- falta definir a informação que será repassada ao WMS
+   -- Dados de Transportadora Rota no WMS -- falta definir a informaï¿½ï¿½o que serï¿½ repassada ao WMS
    PROCEDURE PR_GRV_TRANSP_ROTA(P_CD_ROTA IN FRETE_REGRA_ORIGEM_DESTINO.ID_FROD%TYPE) IS
       --
       -- OBJETIVO..: Popular a Interface de Transportadora Rota
@@ -3556,7 +3557,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
          --
    END PR_GRV_TRANSP_ROTA;
    --
-   -- Dados de Solicitação LGPD - Lei Geral de Proteção de Dados - para o WMS --
+   -- Dados de Solicitaï¿½ï¿½o LGPD - Lei Geral de Proteï¿½ï¿½o de Dados - para o WMS --
    PROCEDURE PR_GRV_LGPD(P_CNPJ_CPF IN PESSOA.ID_CPF%TYPE) IS
       V_NU_SEQ WMS.INT_E_LGPD.NU_SEQ%TYPE;
    BEGIN
@@ -3673,15 +3674,15 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           P_REC_PROD.DS_PRODUTO,
           P_REC_PROD.DS_REDUZIDA,
           NVL(P_REC_PROD.CD_UNIDADE_MEDIDA, 'NC'),
-          NVL(P_REC_PROD.DS_UNIDADE_MEDIDA, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_UNIDADE_MEDIDA, 'Nï¿½O CADASTRADO'),
           P_REC_PROD.ID_ACEITA_DECIMAL,
           NVL(P_REC_PROD.CD_EMBALAGEM, 'NC'),
-          NVL(P_REC_PROD.DS_EMBALAGEM, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_EMBALAGEM, 'Nï¿½O CADASTRADO'),
           NVL(P_REC_PROD.QT_UNIDADE_EMBALAGEM, 1),
           P_REC_PROD.CD_PRODUTO_MASTER,
           NVL(P_REC_PROD.QT_ITENS, 1),
           NVL(P_REC_PROD.CD_FAMILIA, 'NC'),
-          NVL(P_REC_PROD.DS_FAMILIA, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_FAMILIA, 'Nï¿½O CADASTRADO'),
           NVL(P_REC_PROD.VL_ALTURA, 0),
           NVL(P_REC_PROD.VL_LARGURA, 0),
           NVL(P_REC_PROD.VL_PROFUNDIDADE, 0),
@@ -3691,7 +3692,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           NVL(P_REC_PROD.CD_SITUACAO, 15),
           NVL(P_REC_PROD.CD_ROTATIVIDADE, 'NC'),
           NVL(P_REC_PROD.CD_CLASSE, 'NC'),
-          NVL(P_REC_PROD.DS_CLASSE, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_CLASSE, 'Nï¿½O CADASTRADO'),
           P_REC_PROD.QT_DIAS_VALIDADE,
           P_REC_PROD.QT_DIAS_REMONTE,
           NVL(P_REC_PROD.ID_CONTROLE_LOTE, 'N'),
@@ -3702,13 +3703,13 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           P_REC_PROD.CD_CNPJ_FORNECEDOR,
           P_REC_PROD.CD_PRODUTO_FORNECEDOR,
           NVL(P_REC_PROD.CD_LINHA, 'N'),
-          NVL(P_REC_PROD.DS_LINHA, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_LINHA, 'Nï¿½O CADASTRADO'),
           NVL(P_REC_PROD.CD_GRUPO, 'N'),
-          NVL(P_REC_PROD.DS_GRUPO, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_GRUPO, 'Nï¿½O CADASTRADO'),
           NVL(P_REC_PROD.CD_SUBGRUPO, 'N'),
-          NVL(P_REC_PROD.DS_SUBGRUPO, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_SUBGRUPO, 'Nï¿½O CADASTRADO'),
           NVL(P_REC_PROD.CD_MODELO, 'N'),
-          NVL(P_REC_PROD.DS_MODELO, 'NÃO CADASTRADO'),
+          NVL(P_REC_PROD.DS_MODELO, 'Nï¿½O CADASTRADO'),
           P_REC_PROD.TP_ARMAZENAGEM_PRODUTO,
           P_REC_PROD.CD_DEPARTAMENTO,
           P_REC_PROD.DS_DEPARTAMENTO,
@@ -4102,7 +4103,7 @@ CREATE OR REPLACE PACKAGE BODY GC.PCK_GERAR_INTERF_WMS AS
           P_REC_CABNF.NU_NOTA,
           P_REC_CABNF.NU_SERIE_NOTA,
           TO_DATE(P_REC_CABNF.DT_EMISSAO, 'DD/MM/YYYY HH24:MI:SS'),
-          DECODE(P_TP_NF, 'NFE', NULL, P_REC_CABNF.NU_DOC_ERP), -- id da guia de liberação do desembarque
+          DECODE(P_TP_NF, 'NFE', NULL, P_REC_CABNF.NU_DOC_ERP), -- id da guia de liberaï¿½ï¿½o do desembarque
           P_REC_CABNF.DS_PLACA,
           P_ID_LOCAL,
           P_CD_FIL_ESTQ,
