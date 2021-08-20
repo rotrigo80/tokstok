@@ -575,46 +575,6 @@ BEGIN
       FROM GC.ROM_SEP_GRUPO_VENDA RSGV
      WHERE RSGV.ID_RSGV = D_ID_RSGV;
     --
-    IF GC.RET_SE_PVD_EMITE_NF_TRANSF (R_C_RGVI.CD_FIL_IPV
-                                     ,R_C_RGVI.NR_PV_IPV
-                                     ,R_C_RGVI.DT_EMIS_IPV) = 'S'
-     AND D_ID_QRSG <> GC.RET_ID_QUALIF_GRUPO_VENDA(P_IN_VENDA_SITE => 'S')
-     THEN
-     --
-     GC.GERAR_NFS_TRANSF_PEDIDO_VENDA( P_SNS.CD_FIL  ---ERM.30/09/98
-                                      ,R_C_RGVI.CD_FIL_IPV
-                                      ,R_C_RGVI.DT_EMIS_IPV
-                                      ,R_C_RGVI.NR_PV_IPV
-                                      ,P_SNS.ID_PDS
-                                      ,P_SNS.IN_RET_ENTRG   ---ERM.02/04/97 -- AMELLO,17/07/2003
-                                      ,P_SNS.IN_TRANSP
-                                      ,P_SNS.ID_PESSOA_TRANSP
-                                      ,P_SNS.CD_FIL_RSD_EBQ
-                                      ,P_SNS.ID_ROM_EBQ
-                                      ,P_SNS.DS_PLACA_EBQ
-                                      ,P_SNS.DS_PLACA_PLV
-                                      ,P_SNS.SG_UF_PLACA );  ---ERM.29/09/97
-     --
-    ELSE
-     --
-     GC.GERAR_NFS_PEDIDO_VENDA (P_CD_FIL_ESTQ        =>  P_SNS.CD_FIL  ---ERM.30/09/98
-                               ,P_CD_FIL             =>  R_C_RGVI.CD_FIL_IPV
-                               ,P_DT_EMIS            =>  R_C_RGVI.DT_EMIS_IPV
-                               ,P_NR_PV              =>  R_C_RGVI.NR_PV_IPV
-                               ,P_ID_PDS             =>  P_SNS.ID_PDS
-                               ,P_IN_RET_ENTRG       =>  P_SNS.IN_RET_ENTRG   ---ERM.02/04/97 -- AMELLO,17/07/2003
-                               ,P_IN_TRANSP          =>  P_SNS.IN_TRANSP
-                               ,P_ID_PESSOA_TRANSP   =>  P_SNS.ID_PESSOA_TRANSP
-                               ,P_CD_FIL_RSD         =>  P_SNS.CD_FIL_RSD_EBQ
-                               ,P_ID_ROM_RSD         =>  P_SNS.ID_ROM_EBQ
-                               ,P_DS_PLACA           =>  P_SNS.DS_PLACA_EBQ
-                               ,P_DS_PLACA_PLV       =>  P_SNS.DS_PLACA_PLV
-                               ,P_SG_UF_PLACA        =>  P_SNS.SG_UF_PLACA
-                               ,P_ID_GES             =>  P_SNS.ID_GES
-                               ,P_ID_AGRUPADOR_PDS   =>  P_ID_AGRUPADOR_PDS
-                               ,P_ID_TGE             =>  P_SNS.ID_TGE );  ---ERM.29/09/97
-     --
-    END IF;
     --
     D_EXISTE_ITEM := 'S';
     --
@@ -674,13 +634,6 @@ BEGIN
        AND DT_CANC         IS  NULL
        AND ROWNUM = 1
      ORDER BY NR_SEQ_EXEC;
-     --
-     IF D_NR_PROX IS NOT NULL
-       THEN
-         UPDATE GC.ACAO_ITEM_SERVICO_POS_VENDA AIS
-            SET AIS.DT_EXEC = SYSDATE
-          WHERE AIS.NR_ACAO = D_NR_PROX;
-     END IF;
      --
      IF GC.PKG_SERVICO_POS_VENDA.FNC_ENCERRA_SERVICO_POS_VENDA(P_AIS.NR_SOLIC_ISV) THEN
         --
@@ -767,13 +720,6 @@ BEGIN
        AND ROWNUM = 1
      ORDER BY NR_SEQ_EXEC;
     --
-    IF D_NR_PROX IS NOT NULL
-     THEN
-      UPDATE GC.ACAO_ITEM_SERVICO_POS_VENDA AIS
-         SET AIS.DT_EXEC = SYSDATE
-       WHERE AIS.NR_ACAO = D_NR_PROX;
-    END IF;
-    --
     IF GC.PKG_SERVICO_POS_VENDA.FNC_ENCERRA_SERVICO_POS_VENDA(C.NR_SOLIC_ISV)
      THEN
      --
@@ -844,18 +790,6 @@ BEGIN
   --
   GC.PCK_TM_LOG.G_ID_ETAPA   :=  GC.PCK_TM_LOG.G_ID_ETAPA            ||
                                  TO_CHAR(SYSDATE,'DDMMYYYYHH24MISS') || '75-FATURA GES,';
-  --
-  IF NVL(D_EXISTE_ITEM, 'N') = 'N'
-   THEN
-   --
-   RAISE_APPLICATION_ERROR (-20001
-                           ,'ID_GES<'         || P_SNS.ID_GES         || '> ' ||
-                            'CD_FIL_RSD_EBQ<' || P_SNS.CD_FIL_RSD_EBQ || '> ' ||
-                            'ID_ROM_EBQ<'     || P_SNS.ID_ROM_EBQ     || '> ' ||
-                            'DS_PLACA_EBQ<'   || P_SNS.DS_PLACA_EBQ   || '> ' ||
-                            'AGRUPAMENTO DE EMPACOTAMENTO DO SITE SEM PEDIDO PARA FATURAR !');
-   --
-  END IF;
   --
  END IF;
  --
